@@ -11,36 +11,51 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	private Stage primaryStage;
-	private BorderPane mainLayout;
+	private static BorderPane mainLayout;
 	private Login login;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Library Application");
+		this.primaryStage.setResizable(false);
+		this.primaryStage.setTitle("Library App");
 		showLoginView();
-		if (login.isConnected()) {
-			System.out.println("true");
-		}
-
+		showLoginItems();
+		this.login = new Login();
+		login.login();
 	}
 	
-	public void showLoginView() {
+	public static void showLoginView() {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/MainView.fxml"));
+		loader.setLocation(Main.class.getResource("view/LoginView.fxml"));
 		try {
 			mainLayout = loader.load();
 		} catch (IOException e) {
-			System.out.println("Loading error");
+			System.out.println("Loading LoginView error");
 			e.printStackTrace();
 		}
-		Scene scene = new Scene(mainLayout);
-		primaryStage.setScene(scene);
-		primaryStage.show();
 	}
 	
+	public void showLoginItems() {
+		Scene scene = new Scene(mainLayout, 900, 600);
+		this.primaryStage.centerOnScreen();
+		this.primaryStage.setScene(scene);
+		this.primaryStage.show();
+	}
 	
-
+	public static void showOtherView(String viewName) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/" + viewName + ".fxml"));
+		BorderPane otherView = null;
+		try {
+			otherView = loader.load();
+		} catch (IOException e) {
+			System.out.println("Loading " + viewName + "error");
+			e.printStackTrace();
+		}
+		mainLayout.setCenter(otherView);
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

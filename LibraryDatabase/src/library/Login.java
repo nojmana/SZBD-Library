@@ -11,11 +11,9 @@ public class Login {
 
 	private String login;
 	private String password;
-	private boolean connected;
+	private static boolean connected = false;
 
 	public Connection login() {
-		System.out.println(login);
-		System.out.println(password);
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
@@ -24,8 +22,8 @@ public class Login {
 		}
 		Connection conn = null;
 		Properties connectionProps = new Properties();
-		connectionProps.put("user", login);
-		connectionProps.put("password", password);
+		connectionProps.put("user", "librarian");
+		connectionProps.put("password", "librarian");
 		try {
 			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/javabase", connectionProps);
 			connected = true;
