@@ -14,6 +14,8 @@ import library.Main;
 
 public class LoginView {
 
+	private Main main; 
+	
 	@FXML
 	private TextField loginTextfield;
 	
@@ -37,12 +39,13 @@ public class LoginView {
 	}
 	
 	@FXML
-	private void loginButtonClick(MouseEvent event) throws IOException {
+	public void loginButtonClick(MouseEvent event) throws IOException {
 	    loginLabel.setVisible(false);
 		if (loginTextfield.getText().equals("librarian")) {
 			if (passwordTextfield.getText().equals("librarian")) {
 				loginButton.setVisible(false);
-				Main.showOtherView("LibrarianView");
+				Main.showOtherViewBorder("LibrarianView");
+				Main.setLibrarian(true);
 			}
 			else {
 				loginLabel.setVisible(true);
@@ -53,7 +56,8 @@ public class LoginView {
 		else if (loginTextfield.getText().equals("user")) {
 			if (passwordTextfield.getText().equals("user")) {
 				loginButton.setVisible(false);
-				Main.showOtherView("UserView");
+				Main.showOtherViewBorder("UserView");
+				Main.setUser(true);
 			}
 			else {
 				loginLabel.setVisible(true);
@@ -70,7 +74,7 @@ public class LoginView {
 	}
 	
 	@FXML
-	private void closeButtonClick(MouseEvent event) {
+	public void closeButtonClick(MouseEvent event) {
 		Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
 	}

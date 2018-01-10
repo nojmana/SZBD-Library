@@ -30,7 +30,7 @@ public class UserView {
 
 	@FXML
 	private void searchBookButtonClick() {
-		
+		Main.showOtherViewAnchor("SearchBookView");
 	}
 	
 	@FXML

@@ -28,37 +28,37 @@ public class LibrarianView {
 	private Button logoutButton;
 	
 	@FXML
-	private void addBookButtonClick() {
+	public void addBookButtonClick() {
 		
 	}
 
 	@FXML
-	private void addCopyButtonClick() {
+	public void addCopyButtonClick() {
 		
 	}
 
 	@FXML
-	private void deleteBookButtonClick() {
+	public void deleteBookButtonClick() {
 		
 	}
 	
 	@FXML
-	private void deleteCopyButtonClick() {
+	public void deleteCopyButtonClick() {
 		
 	}
 	
 	@FXML
-	private void searchBookButtonClick() {
+	public void searchBookButtonClick() {
+		Main.showOtherViewAnchor("SearchBookView");
+	}
+	
+	@FXML
+	public void showDebtorsButtonClick() {
 		
 	}
 	
 	@FXML
-	private void showDebtorsButtonClick() {
-		
-	}
-	
-	@FXML
-	private void logoutButtonClick() {
+	public void logoutButtonClick() {
 		System.out.println("nothing to do here dum dum dum");
 	}
 }

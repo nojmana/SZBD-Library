@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -13,6 +14,8 @@ public class Main extends Application {
 	private Stage primaryStage;
 	private static BorderPane mainLayout;
 	private Login login;
+	private static boolean user = false;
+	private static boolean librarian = false;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -43,7 +46,7 @@ public class Main extends Application {
 		this.primaryStage.show();
 	}
 	
-	public static void showOtherView(String viewName) {
+	public static void showOtherViewBorder(String viewName) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/" + viewName + ".fxml"));
 		BorderPane otherView = null;
@@ -56,7 +59,37 @@ public class Main extends Application {
 		mainLayout.setCenter(otherView);
 	}
 	
+	public static void showOtherViewAnchor(String viewName) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("view/" + viewName + ".fxml"));
+		AnchorPane otherView = null;
+		try {
+			otherView = loader.load();
+		} catch (IOException e) {
+			System.out.println("Loading " + viewName + "error");
+			e.printStackTrace();
+		}
+		mainLayout.setCenter(otherView);
+	}
+	
+	
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	public static boolean isUser() {
+		return user;
+	}
+
+	public static void setUser(boolean user) {
+		Main.user = user;
+	}
+
+	public static boolean isLibrarian() {
+		return librarian;
+	}
+
+	public static void setLibrarian(boolean librarian) {
+		Main.librarian = librarian;
 	}
 }
