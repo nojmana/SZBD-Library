@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -13,8 +14,8 @@ import javafx.stage.Stage;
 import library.Main;
 
 public class LoginView {
-
-	private Main main; 
+	
+	private String password = "";
 	
 	@FXML
 	private TextField loginTextfield;
@@ -26,26 +27,34 @@ public class LoginView {
 	private Text loginLabel;
 	
 	@FXML
+	private Text passwordLabel;
+	
+	@FXML
 	private Button loginButton;
 	
 	@FXML
 	private Button closeButton;
 
+	@FXML 
+	private ToolBar loginToolbar;
+	
 	@FXML
-	public void handleEnterPressed(KeyEvent event) throws IOException {
+	public void handleEnterPressed(KeyEvent event) {
 	    if (event.getCode() == KeyCode.ENTER) {
 	        loginButtonClick(null);
 	    }
 	}
 	
 	@FXML
-	public void loginButtonClick(MouseEvent event) throws IOException {
+	public void loginButtonClick(MouseEvent event) {
 	    loginLabel.setVisible(false);
 		if (loginTextfield.getText().equals("librarian")) {
 			if (passwordTextfield.getText().equals("librarian")) {
 				loginButton.setVisible(false);
 				Main.showOtherViewBorder("LibrarianView");
-				Main.setLibrarian(true);
+				Main.setLibrarian(true); 
+				Main.setUser(false);
+				
 			}
 			else {
 				loginLabel.setVisible(true);
@@ -58,6 +67,7 @@ public class LoginView {
 				loginButton.setVisible(false);
 				Main.showOtherViewBorder("UserView");
 				Main.setUser(true);
+				Main.setLibrarian(false);
 			}
 			else {
 				loginLabel.setVisible(true);
@@ -68,7 +78,6 @@ public class LoginView {
 		else {
 			loginLabel.setVisible(true);
 			loginLabel.setText("Podany użytkownik nie istnieje. Spróbuj ponownie.");
-			loginTextfield.clear();
 			passwordTextfield.clear();
 		}
 	}
@@ -77,5 +86,7 @@ public class LoginView {
 	public void closeButtonClick(MouseEvent event) {
 		Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
+	    Main.setUser(false);
+		Main.setLibrarian(false);
 	}
 }

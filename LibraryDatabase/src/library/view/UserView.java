@@ -7,6 +7,9 @@ import library.Main;
 public class UserView {
 
 	@FXML
+	private Button confirmButton;
+	
+	@FXML
 	private Button prolongerBookButton;
 	
 	@FXML
@@ -19,13 +22,18 @@ public class UserView {
 	private Button logoutButton;
 	
 	@FXML
-	private void prolongerBookButtonClick() {
+	private void confirmButtonClick() {
 		
+	}
+	
+	@FXML
+	private void prolongerBookButtonClick() {
+		Main.showOtherViewAnchor("ProlongerBookView");
 	}
 
 	@FXML
 	private void bookBookButtonClick() {
-		
+		Main.showOtherViewAnchor("SearchBookView");
 	}
 
 	@FXML
@@ -35,6 +43,7 @@ public class UserView {
 	
 	@FXML
 	private void logoutButtonClick() {
-		System.out.println("nothing to do here dum dum dum");
+		Main.showOtherViewBorder("LoginView");
+		Main.setUser(false);
 	}
 }

@@ -29,22 +29,22 @@ public class LibrarianView {
 	
 	@FXML
 	public void addBookButtonClick() {
-		
+		Main.showOtherViewAnchor("AddBookView");
 	}
 
 	@FXML
 	public void addCopyButtonClick() {
-		
+		Main.showOtherViewAnchor("SearchBookView");
 	}
 
 	@FXML
 	public void deleteBookButtonClick() {
-		
+		Main.showOtherViewAnchor("SearchBookView");
 	}
 	
 	@FXML
 	public void deleteCopyButtonClick() {
-		
+		Main.showOtherViewAnchor("SearchBookView");
 	}
 	
 	@FXML
@@ -54,11 +54,12 @@ public class LibrarianView {
 	
 	@FXML
 	public void showDebtorsButtonClick() {
-		
+		Main.showOtherViewAnchor("ShowDebtorsView");
 	}
 	
 	@FXML
 	public void logoutButtonClick() {
-		System.out.println("nothing to do here dum dum dum");
+		Main.showOtherViewBorder("LoginView");
+		Main.setLibrarian(false);
 	}
 }

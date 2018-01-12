@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.AddBookView">
+   <children>
+      <AnchorPane layoutX="7.0" prefHeight="600.0" prefWidth="900.0">
+         <children>
+            <GridPane layoutX="-6.0" prefHeight="600.0" prefWidth="907.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="207.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="593.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="isbnTextfield" GridPane.columnIndex="1" />
+                  <TextField fx:id="titleTextfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="genreTextfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="publisherTextfield" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="yearTextfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł:" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gatunek:" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wydawnictwo:" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rok wydania:" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="authorComboBox" prefHeight="31.0" prefWidth="597.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+            <Button fx:id="addBookButton" layoutX="375.0" layoutY="514.0" mnemonicParsing="false" onMouseClicked="#addBookButtonClick" prefWidth="150.0" text="Dodaj książkę" AnchorPane.bottomAnchor="20.0" />
+            <Button fx:id="backButton" layoutX="731.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backButtonClick" text="Wróć" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+            <Text fx:id="warningLabel" layoutX="350.0" layoutY="525.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uzupełnij wymagane dane" textAlignment="CENTER" visible="false" wrappingWidth="200.0" AnchorPane.bottomAnchor="70.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

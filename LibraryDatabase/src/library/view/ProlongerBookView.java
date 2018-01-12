@@ -2,12 +2,13 @@ package library.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import library.Main;
 
-public class SearchBookView {
+public class ProlongerBookView {
 	
 	@FXML
 	private TextField titleTextfield;
@@ -25,23 +26,26 @@ public class SearchBookView {
 	private Button backButton;
 	
 	@FXML
-	private ButtonBar buttonBar;
+	private Button confirmButton;
 	
 	@FXML
 	private TableView booksTable;
+
 	
-	@FXML 
-	public void searchButtonClick() {
-		titleTextfield.clear();
-		authorTextfield.clear();
-		isbnTextfield.clear();
+	@FXML
+	public void handleEnterPressed(KeyEvent event) {
+	    if (event.getCode() == KeyCode.ENTER) {
+	    	confirmButtonClick();
+	    }
+	}
+	
+	@FXML
+	public void confirmButtonClick() {
+		
 	}
 	
 	@FXML
 	public void backButtonClick() {
-		if (Main.isLibrarian())
-			Main.showOtherViewBorder("LibrarianView");
-		else if (Main.isUser())
-			Main.showOtherViewBorder("UserView");
+		Main.showOtherViewBorder("UserView");
 	}
 }

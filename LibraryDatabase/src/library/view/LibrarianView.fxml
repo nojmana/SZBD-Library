@@ -21,7 +21,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="addBookButton" mnemonicParsing="false" onMouseClicked="#addBookButtonClick" prefWidth="200.0" text="Dodaj książkę do katalogu" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="addBookButton" mnemonicParsing="false" onMouseClicked="#addBookButtonClick" prefWidth="200.0" text="Dodaj książkę do katalogu" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -36,7 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="searchBookButton" mnemonicParsing="false" onMouseClicked="#searchBookButtonClick" prefHeight="31.0" prefWidth="200.0" text="Wyszukaj książkę" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button fx:id="searchBookButton" mnemonicParsing="false" onMouseClicked="#searchBookButtonClick" prefHeight="31.0" prefWidth="200.0" text="Wyszukaj książkę" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -44,7 +44,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="deleteBookButton" mnemonicParsing="false" onMouseClicked="#deleteBookButtonClick" prefWidth="200.0" text="Usuń książkę z katalogu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="deleteBookButton" mnemonicParsing="false" onMouseClicked="#deleteBookButtonClick" prefWidth="200.0" text="Usuń książkę z katalogu" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -54,12 +54,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="showDebtorsButton" mnemonicParsing="false" onMouseClicked="#showDebtorsButtonClick" prefWidth="200.0" text="Wygeneruj listę dłużników" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button fx:id="showDebtorsButton" mnemonicParsing="false" onMouseClicked="#showDebtorsButtonClick" prefWidth="200.0" text="Wygeneruj listę dłużników" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logoutButtonClick" text="Wyloguj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+            <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logoutButtonClick" prefWidth="80.0" text="Wyloguj" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+               <GridPane.margin>
+                  <Insets right="10.0" top="10.0" />
+               </GridPane.margin></Button>
          </children>
       </GridPane>
    </center>
