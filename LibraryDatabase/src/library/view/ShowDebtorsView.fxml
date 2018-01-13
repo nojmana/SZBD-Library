@@ -5,18 +5,21 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.ShowDebtorsView">
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="library.view.ShowDebtorsView">
    <children>
-      <Button fx:id="backButton" layoutX="804.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backButtonClick" prefWidth="80.0" text="Wróć" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <TableView fx:id="booksTable" layoutX="268.0" layoutY="236.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
-        <columns>
-          <TableColumn fx:id="idColumnField" minWidth="40.0" prefWidth="40.0" text="Id." />
-          <TableColumn fx:id="nameColumnField" minWidth="150.0" prefWidth="191.0" text="Imię" />
-            <TableColumn fx:id="surnameColumnField" minWidth="150.0" prefWidth="151.0" text="Nazwisko" />
-            <TableColumn fx:id="titleColumnField" minWidth="100.0" prefWidth="148.0" text="Tytuł książki" />
-            <TableColumn fx:id="authorColumnField" minWidth="100.0" prefWidth="175.0" text="Nazwisko autora" />
-            <TableColumn fx:id="daysColumnField" minWidth="56.0" prefWidth="154.0" text="Dni przetrzymania" />
-        </columns>
-      </TableView>
+      <AnchorPane prefHeight="600.0" prefWidth="900.0">
+         <children>
+            <TableView fx:id="debtorsTable" layoutX="297.0" layoutY="226.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="80.0">
+              <columns>
+                <TableColumn fx:id="idColumn" prefWidth="220.0" text="Pesel" />
+                <TableColumn fx:id="nameColumn" prefWidth="220.0" text="Imię" />
+                  <TableColumn fx:id="surnameColumn" prefWidth="220.0" text="Nazwisko" />
+                  <TableColumn fx:id="balanceColumn" prefWidth="220.0" text="Saldo" />
+              </columns>
+            </TableView>
+            <Button fx:id="backButton" layoutX="795.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#backButtonClick" text="Button" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

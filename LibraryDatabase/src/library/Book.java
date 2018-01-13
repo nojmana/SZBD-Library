@@ -1,7 +1,9 @@
 package library;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Book {
 
@@ -10,6 +12,7 @@ public class Book {
 	private String genre;
 	private int numberOfCopies;
 	private int authorId;
+	private String authorName;
 
 	public String getIsbn() {
 		return this.isbn;
@@ -51,12 +54,13 @@ public class Book {
 		this.authorId = authorId;
 	}
 	
-	public Book(String isbn, String title, String genre, int authorId, int publicationYear) {
-		this.isbn = isbn;
-		this.title = title;
-		this.genre = genre;
-		this.authorId = authorId;
-		this.numberOfCopies = 0;
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
 	}
 	
 	public Book(String isbn, String title, String genre, int authorId) {
@@ -66,7 +70,17 @@ public class Book {
 		this.authorId = authorId;
 		this.numberOfCopies = 0;
 	}
+	
+	public Book(String isbn, String title, String genre, String authorName) {
+		this.isbn = isbn;
+		this.title = title;
+		this.genre = genre;
+		this.authorName = authorName;
+		this.numberOfCopies = 0;
+	}
 
+	public Book() {};
+	
 	public void addBook () {
 		Statement statement = null;
 		try {
@@ -80,4 +94,20 @@ public class Book {
 		}
 	}
 
+	public ArrayList<Book> generateList() {
+		ArrayList<Book> booksList = new ArrayList<Book>();
+		Statement statement;
+		try {
+			statement = Main.getConnection().createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * from books");
+			while (rs.next()) {
+				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID")));
+			}
+		} catch (SQLException e) {
+			System.out.println("Generating list of books error");
+			e.printStackTrace();
+		}
+
+		return booksList;
+	}
 }

@@ -55,6 +55,8 @@ public class LibrarianView {
 	@FXML
 	public void showDebtorsButtonClick() {
 		Main.showOtherViewAnchor("ShowDebtorsView");
+		ShowDebtorsView debtors = new ShowDebtorsView();
+		debtors.showDebtors();
 	}
 	
 	@FXML

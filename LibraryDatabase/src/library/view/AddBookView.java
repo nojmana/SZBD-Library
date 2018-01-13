@@ -1,10 +1,9 @@
 package library.view;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -51,10 +50,10 @@ public class AddBookView {
 	public void showAuthorsList() {
 		AuthorsList authors = new AuthorsList();
 		authors.generateAuthorsList();
-		ArrayList<Author> authorsList = authors.getAuthorsList();
+		Map<Integer, Author> authorsMap = authors.getAuthorsMap();
 		ObservableList<String> options = FXCollections.observableArrayList();
-		for (Author i: authorsList) {
-			options.add(i.getId() + ". " + i.getName().toUpperCase() + ", " + i.getSurname().toUpperCase());
+		for (Map.Entry<Integer, Author> entry : authorsMap.entrySet()) {
+			options.add(entry.getKey() + ". " + entry.getValue().getName().toUpperCase() + ", " + entry.getValue().getSurname().toUpperCase());
 		}
 		authorComboBox.setItems(options);
 	}

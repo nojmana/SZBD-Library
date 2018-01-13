@@ -28,7 +28,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="searchButton" mnemonicParsing="false" text="Szukaj" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#searchButtonClick" text="Szukaj" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <TextField fx:id="authorTextfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="titleTextfield" GridPane.rowIndex="1" />
             <TextField fx:id="isbnTextfield" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -37,16 +37,13 @@
       <Button fx:id="backButton" layoutX="804.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backButtonClick" prefWidth="80.0" text="Wróć" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <TableView fx:id="booksTable" layoutX="268.0" layoutY="236.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
         <columns>
-          <TableColumn minWidth="40.0" prefWidth="40.0" text="Id." />
-          <TableColumn minWidth="150.0" prefWidth="213.0" text="Tytuł" />
-            <TableColumn minWidth="150.0" prefWidth="156.0" text="Autor" />
-            <TableColumn minWidth="100.0" prefWidth="121.0" text="ISBN" />
-            <TableColumn minWidth="100.0" prefWidth="145.0" text="Gatunek" />
-            <TableColumn minWidth="56.0" prefWidth="107.0" text="Wydanie" />
-            <TableColumn minWidth="0.0" prefWidth="77.0" text="L. egz." />
+          <TableColumn fx:id="titleColumn" minWidth="150.0" prefWidth="278.0" text="Tytuł" />
+            <TableColumn fx:id="authorColumn" minWidth="146.0" prefWidth="200.0" text="Autor" />
+            <TableColumn fx:id="isbnColumn" minWidth="100.0" prefWidth="200.0" text="ISBN" />
+            <TableColumn fx:id="genreColumn" minWidth="100.0" prefWidth="200.0" text="Gatunek" />
         </columns>
       </TableView>
-      <ButtonBar layoutX="99.0" layoutY="145.0" prefHeight="40.0" prefWidth="543.0" visible="false" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+      <ButtonBar fx:id="buttonBar" layoutX="99.0" layoutY="145.0" prefHeight="40.0" prefWidth="543.0" visible="false" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
         <buttons>
           <Button mnemonicParsing="false" text="Usuń książkę" />
             <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="352.0" text="Dodaj egzemplarz" />
