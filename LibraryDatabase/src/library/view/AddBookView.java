@@ -1,5 +1,10 @@
 package library.view;
 
+import java.util.ArrayList;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,10 +16,14 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import library.Author;
+import library.AuthorsList;
+import library.Book;
 import library.Main;
 
 public class AddBookView {
 
+	private Book book;
 	private boolean success;
 	
 	@FXML
@@ -33,35 +42,43 @@ public class AddBookView {
 	private TextField genreTextfield;
 	
 	@FXML
-	private TextField publisherTextfield;
-	
-	@FXML
-	private TextField yearTextfield;
-	
-	@FXML
-	private ComboBox authorComboBox;
+	private ComboBox<String> authorComboBox;
 	
 	@FXML
 	private Text warningLabel;
 	
 	@FXML
+	public void showAuthorsList() {
+		AuthorsList authors = new AuthorsList();
+		authors.generateAuthorsList();
+		ArrayList<Author> authorsList = authors.getAuthorsList();
+		ObservableList<String> options = FXCollections.observableArrayList();
+		for (Author i: authorsList) {
+			options.add(i.getId() + ". " + i.getName().toUpperCase() + ", " + i.getSurname().toUpperCase());
+		}
+		authorComboBox.setItems(options);
+	}
+	
+	@FXML
 	public void addBookButtonClick() {
 		this.success = true;
-		setBorderIfNoText(isbnTextfield);
+		setBorderISBN(isbnTextfield);
 		setBorderIfNoText(titleTextfield);
 		setBorderIfNoText(genreTextfield);
-		setBorderIfNoText(publisherTextfield);
-		setBorderIfNoText(yearTextfield);
+		setBorderIfNoItemSelected(authorComboBox);
+		
 		if (this.success == false) {
 			warningLabel.setVisible(true);
 		}
 		else {
+			String authorIdString = authorComboBox.getSelectionModel().getSelectedItem().toString();
+			book = new Book(isbnTextfield.getText(), titleTextfield.getText(), genreTextfield.getText(), Integer.valueOf(authorIdString.substring(0, authorIdString.indexOf("."))));
+			book.addBook();
 			warningLabel.setVisible(false);
 			isbnTextfield.clear();
 			titleTextfield.clear();
 			genreTextfield.clear();
-			publisherTextfield.clear();
-			yearTextfield.clear();
+			authorComboBox.getSelectionModel().clearSelection();
 		}
 	}
 
@@ -76,6 +93,30 @@ public class AddBookView {
 			item.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		}
 		else {
+			item.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		}
+	}
+	
+	public void setBorderISBN(TextField item) {
+		if (item.getText().matches("[0-9]+") && item.getText().length() == 13) {
+			warningLabel.setText("Uzupełnij wymagane dane.");
+			item.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		}
+		else {
+			this.success = false;
+			item.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+			warningLabel.setText("Numer ISBN powinien składać się z 13 cyfr.");
+		}
+	}
+	
+	public void setBorderIfNoItemSelected(ComboBox<String> item) {
+		if (authorComboBox.getSelectionModel().isEmpty()) {
+			this.success = false;
+			
+			item.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		}
+		else {
+			
 			item.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		}
 	}

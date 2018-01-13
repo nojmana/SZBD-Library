@@ -1,7 +1,5 @@
 package library.view;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -11,12 +9,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import library.Login;
 import library.Main;
 
 public class LoginView {
-	
-	private String password = "";
-	
+
 	@FXML
 	private TextField loginTextfield;
 	
@@ -86,6 +83,8 @@ public class LoginView {
 	public void closeButtonClick(MouseEvent event) {
 		Stage stage = (Stage) closeButton.getScene().getWindow();
 	    stage.close();
+	    Login login = new Login();
+	    login.close();
 	    Main.setUser(false);
 		Main.setLibrarian(false);
 	}

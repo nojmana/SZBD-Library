@@ -20,22 +20,21 @@ public class Login {
 			System.out.println("Connection registration error");
 			e1.printStackTrace();
 		}
-		Connection conn = null;
 		Properties connectionProps = new Properties();
 		connectionProps.put("user", "librarian");
 		connectionProps.put("password", "librarian");
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/javabase", connectionProps);
+			Main.setConnection(DriverManager.getConnection("jdbc:mysql://localhost:3306/javabase", connectionProps));
 			connected = true;
 		} catch (SQLException e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, "Opening connection exception", e);
 		}
-		return conn;
+		return Main.getConnection();
 	}
 	
-	public void close (Connection conn) {
+	public void close () {
 		try { 
-			conn.close();
+			Main.getConnection().close();
 		} catch (SQLException e) {
 			Logger.getLogger(Login.class.getName()).log(Level.SEVERE, "Closing connection exception", e);
 			System.exit(-1);

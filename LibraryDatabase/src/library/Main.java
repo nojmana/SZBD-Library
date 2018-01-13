@@ -1,6 +1,7 @@
 package library;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import library.view.LoginView;
 
 public class Main extends Application {
 
@@ -17,6 +17,7 @@ public class Main extends Application {
 	private Login login;
 	private static boolean user = false;
 	private static boolean librarian = false;
+	private static Connection connection;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -26,7 +27,7 @@ public class Main extends Application {
 		showLoginView();
 		showLoginItems();
 		this.login = new Login();
-		login.login();
+		setConnection(login.login());
 	}
 	
 	public static void showLoginView() {
@@ -92,5 +93,13 @@ public class Main extends Application {
 
 	public static void setLibrarian(boolean librarian) {
 		Main.librarian = librarian;
+	}
+
+	public static Connection getConnection() {
+		return connection;
+	}
+
+	public static void setConnection(Connection connection) {
+		Main.connection = connection;
 	}
 }

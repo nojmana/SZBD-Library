@@ -1,24 +1,26 @@
 package library;
 
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class Book {
 
-	private String ISBN;
+	private String isbn;
 	private String title; 
 	private String genre;
-	private String publisher;
-	private int publicationYear;
 	private int numberOfCopies;
-	
-	public String getISBN() {
-		return ISBN;
+	private int authorId;
+
+	public String getIsbn() {
+		return this.isbn;
 	}
 
-	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 
 	public void setTitle(String title) {
@@ -26,47 +28,56 @@ public class Book {
 	}
 
 	public String getGenre() {
-		return genre;
+		return this.genre;
 	}
 
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 
-	public String getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
-
-	public int getPublicationYear() {
-		return publicationYear;
-	}
-
-	public void setPublicationYear(int publicationYear) {
-		this.publicationYear = publicationYear;
-	}
-
 	public int getNumberOfCopies() {
-		return numberOfCopies;
+		return this.numberOfCopies;
 	}
 
 	public void setNumberOfCopies(int numberOfCopies) {
 		this.numberOfCopies = numberOfCopies;
 	}
+	
+	public int getAuthorId() {
+		return authorId;
+	}
 
-	public Book(String ISBN, String title, String genre, String publisher, int publicationYear) {
-		this.ISBN = ISBN;
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
+	}
+	
+	public Book(String isbn, String title, String genre, int authorId, int publicationYear) {
+		this.isbn = isbn;
 		this.title = title;
 		this.genre = genre;
-		this.publisher = publisher;
-		this.publicationYear = publicationYear;	
+		this.authorId = authorId;
+		this.numberOfCopies = 0;
+	}
+	
+	public Book(String isbn, String title, String genre, int authorId) {
+		this.isbn = isbn;
+		this.title = title;
+		this.genre = genre;
+		this.authorId = authorId;
 		this.numberOfCopies = 0;
 	}
 
 	public void addBook () {
-		System.out.println("Adding book");
+		Statement statement = null;
+		try {
+			statement = Main.getConnection().createStatement();
+			statement.executeUpdate("insert into books(isbn, title, genre, authorId) values (" +
+							isbn + ", '" + title + "', '" + genre + "', " + authorId + ");");	
+			statement.close();			
+		} catch (SQLException e) {
+			System.out.println("Adding book exception");
+			e.printStackTrace();
+		}
 	}
+
 }
