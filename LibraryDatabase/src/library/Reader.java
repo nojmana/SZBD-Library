@@ -7,6 +7,13 @@ public class Reader {
 	private String surname;
 	private float balance;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	};
+	
 	public String getName() {
 		return name;
 	}
@@ -33,18 +40,11 @@ public class Reader {
 	}
 	
 	public Reader(String id, String name, String surname, float balance) {
-		this.setId(id);
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.balance = balance;
 	}
 	
-	public Reader() {}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	};
-		
+	public Reader() {}		
 }

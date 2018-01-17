@@ -7,19 +7,7 @@ import library.Main;
 public class LibrarianView {
 
 	@FXML
-	private Button addBookButton;
-	
-	@FXML
-	private Button addCopyButton;
-	
-	@FXML
-	private Button deleteBookButton;
-	
-	@FXML
-	private Button deleteCopyButton;
-	
-	@FXML
-	private Button searchBookButton;
+	private Button booksViewButton;
 	
 	@FXML
 	private Button showDebtorsButton;
@@ -28,35 +16,13 @@ public class LibrarianView {
 	private Button logoutButton;
 	
 	@FXML
-	public void addBookButtonClick() {
-		Main.showOtherViewAnchor("AddBookView");
-	}
-
-	@FXML
-	public void addCopyButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
-	}
-
-	@FXML
-	public void deleteBookButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
-	}
-	
-	@FXML
-	public void deleteCopyButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
-	}
-	
-	@FXML
-	public void searchBookButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
+	public void booksViewButtonClick() {
+		Main.showOtherViewBorder("LibrarianBooksMenuView");
 	}
 	
 	@FXML
 	public void showDebtorsButtonClick() {
-		Main.showOtherViewAnchor("ShowDebtorsView");
-		ShowDebtorsView debtors = new ShowDebtorsView();
-		debtors.showDebtors();
+		Main.showOtherViewAnchor("LibrarianReadersView");
 	}
 	
 	@FXML

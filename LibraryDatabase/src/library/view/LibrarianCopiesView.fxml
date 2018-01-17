@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.LibrarianCopiesView">
+   <children>
+      <Button fx:id="closeButton" layoutX="804.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#closeButtonClick" prefWidth="80.0" text="Zamknij" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <TableView fx:id="copiesTable" layoutX="268.0" layoutY="236.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
+        <columns>
+          <TableColumn fx:id="copiesIdColumn" minWidth="150.0" prefWidth="182.0" text="Id egzemplarza" />
+            <TableColumn fx:id="publisherColumn" minWidth="146.0" prefWidth="454.0" text="Wydawnictwo" />
+            <TableColumn fx:id="yearColumn" minWidth="0.0" prefWidth="223.0" text="Rok wydania" />
+        </columns>
+      </TableView>
+      <ButtonBar fx:id="buttonBar" layoutX="-1.0" layoutY="550.0" prefHeight="40.0" prefWidth="900.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0">
+         <buttons>
+            <Button fx:id="deleteCopyButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#deleteCopyButtonClick" prefWidth="150.0" text="Usuń egzemplarz" textAlignment="CENTER" translateX="-375.0" />
+         </buttons>
+      </ButtonBar>
+      <Text fx:id="descriptionLabel" layoutX="69.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wszystkie egzemplarze książki pt. " wrappingWidth="800.6708984375" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="70.0" />
+   </children>
+</AnchorPane>

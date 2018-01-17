@@ -8,7 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import library.Main;
 
-public class ProlongerBookView {
+public class UserAccountView {
 	
 	@FXML
 	private TextField titleTextfield;

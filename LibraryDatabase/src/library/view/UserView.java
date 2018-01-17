@@ -7,38 +7,22 @@ import library.Main;
 public class UserView {
 
 	@FXML
-	private Button confirmButton;
+	private Button booksButton;
 	
 	@FXML
-	private Button prolongerBookButton;
-	
-	@FXML
-	private Button bookBookButton;
+	private Button userAccountButton;
 
-	@FXML
-	private Button searchBookButton;
-	
 	@FXML
 	private Button logoutButton;
 	
 	@FXML
-	private void confirmButtonClick() {
-		
-	}
-	
-	@FXML
-	private void prolongerBookButtonClick() {
-		Main.showOtherViewAnchor("ProlongerBookView");
-	}
-
-	@FXML
-	private void bookBookButtonClick() {
+	private void booksButtonClick() {
 		Main.showOtherViewAnchor("SearchBookView");
 	}
 
 	@FXML
-	private void searchBookButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
+	private void userAccountButton() {
+		Main.showOtherViewAnchor("UserAccountView");
 	}
 	
 	@FXML

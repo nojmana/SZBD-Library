@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -20,7 +22,7 @@ import library.AuthorsList;
 import library.Book;
 import library.Main;
 
-public class AddBookView {
+public class LibrarianAddBookView {
 
 	private Book book;
 	private boolean success;
@@ -47,6 +49,13 @@ public class AddBookView {
 	private Text warningLabel;
 	
 	@FXML
+	public void handleEnterPressed(KeyEvent event) {
+	    if (event.getCode() == KeyCode.ENTER) {
+	        addBookButtonClick();
+	    }
+	}
+	
+	@FXML
 	public void showAuthorsList() {
 		AuthorsList authors = new AuthorsList();
 		authors.generateAuthorsList();
@@ -71,7 +80,7 @@ public class AddBookView {
 		}
 		else {
 			String authorIdString = authorComboBox.getSelectionModel().getSelectedItem().toString();
-			book = new Book(isbnTextfield.getText(), titleTextfield.getText(), genreTextfield.getText(), Integer.valueOf(authorIdString.substring(0, authorIdString.indexOf("."))));
+			book = new Book(isbnTextfield.getText(), titleTextfield.getText(), genreTextfield.getText(), Integer.valueOf(authorIdString.substring(0, authorIdString.indexOf("."))), 0);
 			book.addBook();
 			warningLabel.setVisible(false);
 			isbnTextfield.clear();
@@ -83,7 +92,7 @@ public class AddBookView {
 
 	@FXML
 	public void backButtonClick() {
-		Main.showOtherViewBorder("LibrarianView");
+		Main.showOtherViewBorder("LibrarianBooksMenuView");
 	}
 	
 	public void setBorderIfNoText(TextField item) {
@@ -97,7 +106,7 @@ public class AddBookView {
 	}
 	
 	public void setBorderISBN(TextField item) {
-		if (item.getText().matches("[0-9]+") && item.getText().length() == 13) {
+		if (item.getText().matches("[0-9]+") && item.getText().length() == 13 ) {
 			warningLabel.setText("Uzupełnij wymagane dane.");
 			item.setBorder(new Border(new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		}
@@ -111,7 +120,6 @@ public class AddBookView {
 	public void setBorderIfNoItemSelected(ComboBox<String> item) {
 		if (authorComboBox.getSelectionModel().isEmpty()) {
 			this.success = false;
-			
 			item.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		}
 		else {

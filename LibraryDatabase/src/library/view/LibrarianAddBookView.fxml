@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.AddBookView">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.LibrarianAddBookView">
    <children>
-      <AnchorPane layoutX="7.0" prefHeight="600.0" prefWidth="900.0">
+      <AnchorPane layoutX="7.0" onKeyPressed="#handleEnterPressed" prefHeight="600.0" prefWidth="900.0">
          <children>
-            <GridPane layoutX="-6.0" prefHeight="600.0" prefWidth="907.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+            <GridPane layoutX="-6.0" onKeyPressed="#handleEnterPressed" prefHeight="600.0" prefWidth="907.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="407.0" minWidth="10.0" prefWidth="207.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="593.0" />
@@ -25,14 +25,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField fx:id="isbnTextfield" GridPane.columnIndex="1" />
-                  <TextField fx:id="titleTextfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="genreTextfield" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="isbnTextfield" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" />
+                  <TextField fx:id="titleTextfield" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="genreTextfield" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ISBN:" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł:" GridPane.rowIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gatunek:" GridPane.rowIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:" GridPane.rowIndex="2" />
-                  <ComboBox fx:id="authorComboBox" onShowing="#showAuthorsList" prefHeight="31.0" prefWidth="597.0" promptText="wybierz autora" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <ComboBox fx:id="authorComboBox" onKeyPressed="#handleEnterPressed" onShowing="#showAuthorsList" prefHeight="31.0" prefWidth="597.0" promptText="wybierz autora" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <Button fx:id="addBookButton" layoutX="375.0" layoutY="514.0" mnemonicParsing="false" onMouseClicked="#addBookButtonClick" prefWidth="150.0" text="Dodaj książkę" AnchorPane.bottomAnchor="20.0" />

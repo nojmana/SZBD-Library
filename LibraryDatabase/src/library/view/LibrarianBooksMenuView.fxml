@@ -7,9 +7,8 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.LibrarianView">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.LibrarianBooksMenuView">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -20,7 +19,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="booksViewButton" mnemonicParsing="false" onMouseClicked="#booksViewButtonClick" prefWidth="220.0" text="Książki" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Button fx:id="addBookButton" mnemonicParsing="false" onMouseClicked="#addBookButtonClick" prefWidth="220.0" text="Dodaj książkę" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -28,7 +27,7 @@
                   <Insets top="150.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="showDebtorsButton" mnemonicParsing="false" onMouseClicked="#showDebtorsButtonClick" prefWidth="220.0" text="Czytelnicy" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="searchBookButton" mnemonicParsing="false" onMouseClicked="#searchBookButtonClick" prefWidth="220.0" text="Szukaj książki" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -36,15 +35,10 @@
                   <Insets bottom="150.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logoutButtonClick" prefWidth="80.0" text="Wyloguj" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+            <Button fx:id="backButton" mnemonicParsing="false" onMouseClicked="#backButtonClick" prefWidth="80.0" text="Wróć" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets right="10.0" top="10.0" />
                </GridPane.margin></Button>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Witaj, Bibliotekarzu! Wybierz, z którego katalogu chcesz skorzystać." GridPane.halignment="CENTER" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets top="50.0" />
-               </GridPane.margin>
-            </Text>
          </children>
          <BorderPane.margin>
             <Insets />
