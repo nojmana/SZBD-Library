@@ -53,12 +53,28 @@ public class Copy {
 	
 	public Copy() {}
 	
-	public ArrayList<Copy> generateList(String isbn) {
+	public ArrayList<Copy> generateListIsbn(String isbn) {
 		ArrayList<Copy> copiesList = new ArrayList<Copy>();
 		Statement statement;
 		try {
 			statement = Main.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * from copies");
+			ResultSet rs = statement.executeQuery("SELECT * from copies where isbn = '" + isbn + "';");
+			while (rs.next()) {
+				copiesList.add(new Copy(rs.getInt("copyId"), rs.getString("publisher"), rs.getInt("year"), rs.getString("isbn")));
+			}
+		} catch (SQLException e) {
+			System.out.println("Generating list of copies exception");
+			e.printStackTrace();
+		}
+		return copiesList;
+	}
+	
+	public ArrayList<Copy> generateListAll() {
+		ArrayList<Copy> copiesList = new ArrayList<Copy>();
+		Statement statement;
+		try {
+			statement = Main.getConnection().createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * from copies;");
 			while (rs.next()) {
 				copiesList.add(new Copy(rs.getInt("copyId"), rs.getString("publisher"), rs.getInt("year"), rs.getString("isbn")));
 			}

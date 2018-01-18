@@ -13,15 +13,15 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.UserAccountView">
    <children>
       <Button fx:id="backButton" layoutX="804.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backButtonClick" prefWidth="80.0" text="Wróć" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <TableView fx:id="booksTable" layoutX="268.0" layoutY="236.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
+      <TableView fx:id="borrowingsTable" layoutX="268.0" layoutY="236.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="200.0">
         <columns>
-          <TableColumn minWidth="40.0" prefWidth="40.0" text="Id." />
-          <TableColumn minWidth="150.0" prefWidth="213.0" text="Tytuł" />
-            <TableColumn minWidth="150.0" prefWidth="156.0" text="Autor" />
-            <TableColumn minWidth="100.0" prefWidth="121.0" text="ISBN" />
-            <TableColumn minWidth="100.0" prefWidth="145.0" text="Gatunek" />
-            <TableColumn minWidth="56.0" prefWidth="107.0" text="Wydanie" />
-            <TableColumn minWidth="0.0" prefWidth="77.0" text="L. egz." />
+          <TableColumn fx:id="titleColumn" minWidth="136.0" prefWidth="136.0" text="Tytuł" />
+            <TableColumn fx:id="authorColumn" minWidth="138.0" prefWidth="141.0" text="Autor" />
+            <TableColumn fx:id="isbnColumn" minWidth="100.0" prefWidth="127.0" text="ISBN" />
+            <TableColumn fx:id="copyIdColumn" minWidth="56.0" prefWidth="64.0" text="Id egz." />
+            <TableColumn fx:id="dateFirstColumn" minWidth="0.0" prefWidth="148.0" text="Data wypożyczenia" />
+            <TableColumn fx:id="dateSecondColumn" minWidth="0.0" prefWidth="139.0" text="Data zwrotu" />
+            <TableColumn fx:id="daysColumn" minWidth="0.0" prefWidth="104.0" text="Liczba dni" />
         </columns>
       </TableView>
       <GridPane layoutX="107.0" layoutY="55.0" prefHeight="90.0" prefWidth="393.0">
@@ -36,9 +36,12 @@
         </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Podaj swój PESEL:" GridPane.rowIndex="1" />
-            <TextField onKeyTyped="#confirmButtonClick" prefHeight="31.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="idTextfield" onKeyTyped="#handleEnterPressed" prefHeight="31.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fx:id="balanceLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Twoje saldo wynosi:" visible="false" wrappingWidth="196.0595703125" GridPane.rowIndex="2" />
+            <Text fx:id="balanceAmountLabel" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="RIGHT" visible="false" wrappingWidth="195.6708984375" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button fx:id="confirmButton" layoutX="519.0" layoutY="85.0" mnemonicParsing="false" onMouseClicked="#confirmButtonClick" text="Zatwierdź" />
+      <Text fx:id="warningLabel" layoutX="107.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pesel powinien składać się z 11 cyfr." visible="false" wrappingWidth="393.000004068017" />
    </children>
 </AnchorPane>

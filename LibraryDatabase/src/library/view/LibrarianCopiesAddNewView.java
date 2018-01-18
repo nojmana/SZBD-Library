@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import library.Copy;
-import library.Main;
 
 public class LibrarianCopiesAddNewView {
 

@@ -64,7 +64,7 @@ public class LibrarianCopiesView {
 	public void showCopies() {
 		ArrayList<Copy> copiesList = null;	
 		Copy copy = new Copy();
-		copiesList = copy.generateList(isbn);
+		copiesList = copy.generateListIsbn(isbn);
 		ObservableList<Copy> data = FXCollections.observableArrayList();
 			
 		for (Copy i: copiesList) {

@@ -84,6 +84,7 @@ public class SearchBookView {
 		    	handleNoRowSelected();
 		    }
 		});
+		searchButtonClick();
 	}
 	
 	@FXML

@@ -101,13 +101,29 @@ public class Book {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<Book> generateListReader(String id) {
+		ArrayList<Book> booksList = new ArrayList<Book>();
+		Statement statement;
+		try {
+			statement = Main.getConnection().createStatement();
+			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId from books join readers on books.isbn=copies.isbn;");
+			while (rs.next()) {
+				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
+			}
+		} catch (SQLException e) {
+			System.out.println("Generating list of books error");
+			e.printStackTrace();
+		}
+		return booksList;
+	}
 
 	public ArrayList<Book> generateListAll() {
 		ArrayList<Book> booksList = new ArrayList<Book>();
 		Statement statement;
 		try {
 			statement = Main.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId, count(*) as numberOfCopies from books join copies on books.isbn=copies.isbn;");
+			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId, count(copyId) as numberOfCopies from books left join copies on books.isbn=copies.isbn group by isbn;");
 			while (rs.next()) {
 				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
 			}
@@ -123,7 +139,7 @@ public class Book {
 		Statement statement;
 		try {
 			statement = Main.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId, count(*) as numberOfCopies from books join copies on books.isbn=copies.isbn where title = '" + title + "'");
+			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId, count(copyId) as numberOfCopies from books join copies on books.isbn=copies.isbn where title = '" + title + "' group by isbn;");
 			while (rs.next()) {
 				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
 			}
@@ -140,9 +156,27 @@ public class Book {
 		
 		try {
 			statement = Main.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, books.authorId, count(*) as numberOfCopies from books "
+			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, books.authorId, count(copyId) as numberOfCopies from books "
 					+ "join copies on books.isbn=copies.isbn join authors on books.authorId=authors.authorId where authors.surname = '" 
-					+ author + "'");
+					+ author + "' group by isbn;");
+			while (rs.next()) {
+				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
+			}
+		} catch (SQLException e) {
+			System.out.println("Generating list of books error");
+			e.printStackTrace();
+		}
+		return booksList;
+	}
+		
+	public ArrayList<Book> generateListTitleAndAuthor(String author, String title) {
+		ArrayList<Book> booksList = new ArrayList<Book>();
+		Statement statement;
+		try {
+			statement = Main.getConnection().createStatement();
+			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, books.authorId, count(copyId) as numberOfCopies from books "
+					+ "join copies on books.isbn=copies.isbn join authors on books.authorId=authors.authorId where authors.surname = '" 
+					+ author + "' and books.title = '" + title + "' group by isbn;");
 			while (rs.next()) {
 				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
 			}
@@ -153,21 +187,20 @@ public class Book {
 		return booksList;
 	}
 	
-	public ArrayList<Book> generateListTitleAndAuthor(String author, String title) {
-		ArrayList<Book> booksList = new ArrayList<Book>();
+	public Book returnBookAndAuthorFromIsbn(String isbn) {
 		Statement statement;
+		Book book = null;
 		try {
 			statement = Main.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, books.authorId, count(*) as numberOfCopies from books "
-					+ "join copies on books.isbn=copies.isbn join authors on books.authorId=authors.authorId where authors.surname = '" 
-					+ author + "' and books.title = '" + title + "'");
+			ResultSet rs = statement.executeQuery("select isbn, genre, title, name, surname from books "
+					+ "join authors on books.authorId=authors.authorId where isbn= '" + isbn + "';");
 			while (rs.next()) {
-				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
+				book = new Book(rs.getString("isbn"), rs.getString("title"), rs.getString("GENRE"), rs.getString("name").toUpperCase() + " " + rs.getString("surname").toUpperCase(), 0);
 			}
 		} catch (SQLException e) {
-			System.out.println("Generating list of books error");
+			System.out.println("Returning book from isbn error");
 			e.printStackTrace();
 		}
-		return booksList;
+		return book;
 	}
 }
