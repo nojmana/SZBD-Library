@@ -66,7 +66,7 @@ public class LibrarianReadersView {
 		for (Map.Entry<String, Reader> entry : readersMap.entrySet()) {
 			data.add(new Reader(entry.getKey(), entry.getValue().getName(), entry.getValue().getSurname(), entry.getValue().getBalance()));
 		}
-		idColumn.setCellValueFactory(new PropertyValueFactory<Reader, String>("idNumber"));
+		idColumn.setCellValueFactory(new PropertyValueFactory<Reader, String>("id"));
 		nameColumn.setCellValueFactory(new PropertyValueFactory<Reader, String>("name"));
 		surnameColumn.setCellValueFactory(new PropertyValueFactory<Reader, String>("surname"));
 		balanceColumn.setCellValueFactory(new PropertyValueFactory<Reader, Float>("balance"));

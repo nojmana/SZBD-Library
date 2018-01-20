@@ -17,7 +17,7 @@ public class LibrarianBooksMenuView {
 	
 	@FXML
 	public void searchBookButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
+		Main.showOtherViewAnchor("LibrarianSearchBookView");
 	}
 	
 	@FXML

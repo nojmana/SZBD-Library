@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.view.UserSearchBooksView">
+   <children>
+      <GridPane layoutX="250.0" layoutY="40.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko autora" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tytuł" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#searchButtonClick" text="Szukaj" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <TextField fx:id="authorTextfield" onKeyPressed="#handleEnterPressed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="titleTextfield" onKeyPressed="#handleEnterPressed" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="backButton" layoutX="804.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backButtonClick" prefWidth="80.0" text="Wróć" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+      <TableView fx:id="booksTable" layoutX="268.0" layoutY="236.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="150.0">
+        <columns>
+          <TableColumn fx:id="titleColumn" minWidth="150.0" prefWidth="205.0" text="Tytuł" />
+            <TableColumn fx:id="authorColumn" minWidth="146.0" prefWidth="176.0" text="Autor" />
+            <TableColumn fx:id="isbnColumn" minWidth="100.0" prefWidth="202.0" text="ISBN" />
+            <TableColumn fx:id="genreColumn" minWidth="100.0" prefWidth="129.0" text="Gatunek" />
+            <TableColumn fx:id="copiesColumn" minWidth="100.0" prefWidth="147.0" text="Liczba wolnych egz." />
+        </columns>
+      </TableView>
+      <ButtonBar fx:id="buttonBar" layoutY="550.0" prefHeight="40.0" prefWidth="900.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <buttons>
+            <Button fx:id="addCopyButton" mnemonicParsing="false" onMouseClicked="#addCopyButtonClick" prefHeight="31.0" prefWidth="200.0" text="Zarezerwuj egzemplarz" textAlignment="CENTER" translateX="-350.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Button>
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

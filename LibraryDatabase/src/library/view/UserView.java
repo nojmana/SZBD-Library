@@ -17,7 +17,7 @@ public class UserView {
 	
 	@FXML
 	private void booksButtonClick() {
-		Main.showOtherViewAnchor("SearchBookView");
+		Main.showOtherViewAnchor("UserSearchBooksView");
 	}
 
 	@FXML

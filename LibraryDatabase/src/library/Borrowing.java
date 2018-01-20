@@ -103,4 +103,15 @@ public class Borrowing {
 		return borrowingsList;
 	}
 	
+	public void prolongerBorrowing(int copyId, String readerId) {
+		Statement statement = null;
+		try {
+			statement = Main.getConnection().createStatement();
+			statement.executeUpdate("update borrowings set daysAmount = 28  where readerId='" + readerId + "' and copyId = " + copyId + ";");	
+			statement.close();			
+		} catch (SQLException e) {
+			System.out.println("Prolongering borrowing exception");
+			e.printStackTrace();
+		}
+	}
 }

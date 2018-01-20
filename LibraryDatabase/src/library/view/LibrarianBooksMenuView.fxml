@@ -27,7 +27,7 @@
                   <Insets top="150.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="searchBookButton" mnemonicParsing="false" onMouseClicked="#searchBookButtonClick" prefWidth="220.0" text="Szukaj książki" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="searchBookButton" mnemonicParsing="false" onMouseClicked="#searchBookButtonClick" prefWidth="220.0" text="Przeglądaj książki" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -139,7 +139,7 @@ public class Book {
 		Statement statement;
 		try {
 			statement = Main.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId, count(copyId) as numberOfCopies from books join copies on books.isbn=copies.isbn where title = '" + title + "' group by isbn;");
+			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, authorId, count(copyId) as numberOfCopies from books left join copies on books.isbn=copies.isbn where title = '" + title + "' group by isbn;");
 			while (rs.next()) {
 				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
 			}
@@ -157,7 +157,7 @@ public class Book {
 		try {
 			statement = Main.getConnection().createStatement();
 			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, books.authorId, count(copyId) as numberOfCopies from books "
-					+ "join copies on books.isbn=copies.isbn join authors on books.authorId=authors.authorId where authors.surname = '" 
+					+ "left join copies on books.isbn=copies.isbn left join authors on books.authorId=authors.authorId where authors.surname = '" 
 					+ author + "' group by isbn;");
 			while (rs.next()) {
 				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));
@@ -175,7 +175,7 @@ public class Book {
 		try {
 			statement = Main.getConnection().createStatement();
 			ResultSet rs = statement.executeQuery("select books.isbn, title, genre, books.authorId, count(copyId) as numberOfCopies from books "
-					+ "join copies on books.isbn=copies.isbn join authors on books.authorId=authors.authorId where authors.surname = '" 
+					+ "left join copies on books.isbn=copies.isbn left join authors on books.authorId=authors.authorId where authors.surname = '" 
 					+ author + "' and books.title = '" + title + "' group by isbn;");
 			while (rs.next()) {
 				booksList.add(new Book(rs.getString("ISBN"), rs.getString("TITLE"), rs.getString("GENRE"), rs.getInt("AUTHORID"), rs.getInt("numberOfCopies")));

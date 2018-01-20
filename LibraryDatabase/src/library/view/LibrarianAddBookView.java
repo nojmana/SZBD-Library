@@ -74,7 +74,6 @@ public class LibrarianAddBookView {
 		setBorderIfNoText(titleTextfield);
 		setBorderIfNoText(genreTextfield);
 		setBorderIfNoItemSelected(authorComboBox);
-		
 		if (this.success == false) {
 			warningLabel.setVisible(true);
 		}

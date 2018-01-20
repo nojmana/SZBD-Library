@@ -1,6 +1,5 @@
 package library.view;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -8,28 +7,27 @@ import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import library.Author;
 import library.AuthorsList;
 import library.Book;
 import library.Main;
+import library.Reader;
 
-public class SearchBookView {
+public class UserSearchBooksView {
 	
 	private String isbn; 
+	private String idNumber;
 	
 	@FXML
 	private TextField titleTextfield;
@@ -45,15 +43,9 @@ public class SearchBookView {
 	
 	@FXML
 	private ButtonBar buttonBar;
-	
-	@FXML
-	private Button deleteBookButton;
-	
+
 	@FXML
 	private Button addCopyButton;
-	
-	@FXML
-	private Button deleteCopyButton;
 	
 	@FXML
 	private TableView<Book> booksTable;
@@ -85,6 +77,13 @@ public class SearchBookView {
 		    }
 		});
 		searchButtonClick();
+	}
+	
+	@FXML
+	public void handleEnterPressed(KeyEvent event) {
+	    if (event.getCode() == KeyCode.ENTER) {
+	    	searchButtonClick();
+	    }
 	}
 	
 	@FXML
@@ -131,71 +130,44 @@ public class SearchBookView {
 		booksTable.setItems(data);
 	}
 	
-	@FXML 
-	public void deleteCopyButtonClick() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("LibrarianCopiesView.fxml"));
-		Parent root = null;
-		try {
-			root = (Parent) loader.load();
-
-		} catch (IOException e) {
-			System.out.println("Loading LibrarianCopiesView error");
-			e.printStackTrace();
-		}
-		LibrarianCopiesView librarianCopiesView = loader.getController();
-		librarianCopiesView.setIsbn(isbn);
-		librarianCopiesView.initializeSecondTime();
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();		
-	}
-	
 	@FXML
 	public void addCopyButtonClick() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("LibrarianCopiesAddNewView.fxml"));
-		Parent root = null;
-		try {
-			root = (Parent) loader.load();
+		TextInputDialog dialog = new TextInputDialog("Podaj numer PESEL.");
+		dialog.setTitle("Rezerwacja");
+		dialog.setHeaderText("Dla kogo mamy zarezerwować książkę?");
 
-		} catch (IOException e) {
-			System.out.println("Loading LibrarianCopiesAddNewView error");
-			e.printStackTrace();
-		}
-		LibrarianCopiesAddNewView librarianCopiesAddNewView = loader.getController();
-		librarianCopiesAddNewView.setIsbn(isbn);
-		librarianCopiesAddNewView.initializeSecondTime();
-		Stage stage = new Stage();
-		stage.setScene(new Scene(root));
-		stage.show();
-	}
-	
-	@FXML
-	public void deleteBookButtonClick() {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Usuwanie książki");
-		alert.setHeaderText(null);
-		alert.setContentText("Czy na pewno chcesz usunąć książkę o numerze ISBN " + booksTable.getSelectionModel().getSelectedItem().getIsbn() + "?");
-		
-		ButtonType buttonTypeOne = new ButtonType("Nie", ButtonData.CANCEL_CLOSE);
-		ButtonType buttonTypeTwo = new ButtonType("Tak");
-
-		alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeTwo);
-		
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == buttonTypeTwo){
-			Book book = new Book();
-			book.deleteBook(booksTable.getSelectionModel().getSelectedItem().getIsbn());
-			searchButtonClick();
-		} else {
-		    alert.close();
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+			Reader reader = new Reader();
+			idNumber = result.get();
+			
+			String bookBookresult = reader.bookBook(idNumber, isbn);
+			if (bookBookresult.equals("success")) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Rezerwacja");
+				alert.setHeaderText(null);
+				alert.setContentText("Udało się zarezerwować dla Ciebie egzemplarz książki o ISBN " + isbn + ".");
+				alert.showAndWait();
+			} 
+			else if (bookBookresult.equals("no copy")) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Rezerwacja");
+				alert.setHeaderText(null);
+				alert.setContentText("Niestety nie ma egzemplarza, który można zarezerwować.");
+				alert.showAndWait();
+			}
+			else if (bookBookresult.equals("no user")) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Rezerwacja");
+				alert.setHeaderText(null);
+				alert.setContentText("W bazie danych nie ma użytkownika o PESELu " + idNumber + ".");
+				alert.showAndWait();
+			}
 		}
 	}
 	
 	@FXML
 	public void backButtonClick() {
-		if (Main.isLibrarian())
-			Main.showOtherViewBorder("LibrarianBooksMenuView");
-		else if (Main.isUser())
-			Main.showOtherViewBorder("UserView");
+		Main.showOtherViewBorder("UserView");
 	}
 }
